@@ -1,0 +1,16 @@
+---
+- name: Create a Fibre Channel Network
+  oneview_fc_network:
+    config: "{{ config }}"
+    state: present
+    validate_etag: False
+    data:
+      name: "{{ item }}"
+      fabricType: 'FabricAttach'
+      linkStabilityTime: '30'
+      autoLoginRedistribution: true
+      type: "fc-networkV4"
+  delegate_to: localhost
+  register: fc_network_1
+  with_items:
+      - "test_ansible"
